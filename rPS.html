@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <!--Link to Bootstrap css styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<!--Creating a container to hold the page content-->    
+<div class="container">
+
+  <!--Setting a header with center alignment and margin spacing-->
+  <h1 class="container text-center my-4">Rock Paper Scissors Game</h1>
+
+  <!--Adding an image below the page header with Bootstrap styling-->
+  <img class="rounded mx-auto d-block" src="rps.png" class="img-fluid" alt="rock paper scissors">
+
+  <!--Adding a row with one column for buttons for player's choice and one column for scoreboard totals with Bootstrap styling-->
+  <!--class row has margin spacing and columns are set to even width using Bootstrap styling-->
+    <div class="row my-4">
+        <div class="col-md-6">
+            <!--Using a card to hold the three buttons with Bootstrap styling-->
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Choose One:</h2>
+                    <br>
+                    <button type="button" id="rock" class="btn btn-success">Rock</button>
+                    <button type="button" id="paper" class="btn btn-primary">Paper</button>
+                    <button type="button" id="scissors" class="btn btn-warning">Scissors</button>
+                </div>
+            </div>
+        </div>
+        <!--Using a card to hold the scoreboard with Bootstrap styling-->        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Scoreboard:</h2>
+                    <br>
+                    <p id="player-score">Your wins: 0</p>
+                    <p id="computer-score">Computer wins: 0</p>
+                    <p id="result-tie">Tie rounds: 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!--Linking the JavaScript file-->
+    <script src="rps.js"></script>
+
+</body>
+
+</html>
