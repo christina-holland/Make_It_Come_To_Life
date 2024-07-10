@@ -1,96 +1,75 @@
-//Setting variables that will access the buttons and score counts in the HTML
-const rockButton = document.getElementById("rock");
-const paperButton = document.getElementById("paper");
-const scissorsButton = document.getElementById("scissors");
-const playerScore = document.getElementById("player-score");
-const computerScore = document.getElementById("computer-score");
-const tieText = document.getElementById("result-tie");
-
-//Defining variables for the amount of wins
-let computerWinAmount = 0;
-let playerWinAmount = 0;
-let tieAmount = 0;
-
-//Setting the event listeners to assign an outcome for the player's hand when a button is selected and then play a round of the game
-rockButton.addEventListener("click", function(){
-    let hand1 = "rock";
-    let hand2 = computerPlay();
-    playRound(hand1, hand2);
+var _a, _b, _c;
+//Accessing HTML elements using document.getElementById
+//and setting them to the types set in the interfaces 
+var elements = {
+    rockButton: document.getElementById("rock"),
+    paperButton: document.getElementById("paper"),
+    scissorsButton: document.getElementById("scissors"),
+    playerScore: document.getElementById("player-score"),
+    computerScore: document.getElementById("computer-score"),
+    tieText: document.getElementById("result-tie"),
+};
+//Defining scoring variable
+var score = {
+    playerWins: 0,
+    computerWins: 0,
+    ties: 0,
+};
+//Adding event listeners to handle button clicks and game play
+(_a = elements.rockButton) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
+    playRound("rock", computerPlay());
 });
-
-paperButton.addEventListener("click", function() {
-    let hand1 = "paper";
-    let hand2 = computerPlay();
-    playRound(hand1, hand2);
+(_b = elements.paperButton) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () {
+    playRound("paper", computerPlay());
 });
-
-scissorsButton.addEventListener("click", function() {
-    let hand1 = "scissors";
-    let hand2 = computerPlay();
-    playRound(hand1, hand2);
+(_c = elements.scissorsButton) === null || _c === void 0 ? void 0 : _c.addEventListener("click", function () {
+    playRound("scissors", computerPlay());
 });
-
-//Setting the computerPlay function to randomly make a choice for the computer's hand
 function computerPlay() {
-    let choice = parseInt(Math.random()*10)%3;
-    switch(choice) {
+    var choice = Math.floor(Math.random() * 3);
+    switch (choice) {
         case 0:
-            choice = "rock";
-            break;
+            return "rock";
         case 1:
-            choice = "paper";
-            break;
+            return "paper";
         case 2:
-            choice = "scissors";
-            break;
+            return "scissors";
+        default:
+            return "rock"; // Default case, though not expected to reach here
     }
-    return choice;
 }
-
-//Setting functions to increase the score totals based on who wins the game
-function playerWin() {
-    playerWinAmount++;
-    playerScore.innerHTML = "Your wins: " + playerWinAmount;
+//Defining functions to update and display scores on the HTML page
+function updatePlayerScore() {
+    if (elements.playerScore) {
+        elements.playerScore.textContent = "Your wins: ".concat(score.playerWins);
+    }
 }
-
-function computerWin() {
-    computerWinAmount++;
-    computerScore.innerHTML = "Computer wins: " + computerWinAmount;
+function updateComputerScore() {
+    if (elements.computerScore) {
+        elements.computerScore.textContent = "Computer wins: ".concat(score.computerWins);
+    }
 }
-
-function tieWin() {
-    tieAmount++;
-    tieText.innerHTML = "Tie rounds: " + tieAmount;
+function updateTieScore() {
+    if (elements.tieText) {
+        elements.tieText.textContent = "Tie rounds: ".concat(score.ties);
+    }
 }
-
-//Setting a function called playRound that determines the winner of the game
-function playRound(hand1, hand2) {
-    if ( (hand1 === 'scissors' && hand2 === 'paper') ||
-         (hand1 === 'rock' && hand2 === 'scissors') ||
-         (hand1 === 'paper' && hand2 === 'rock') ) 
-        {
-        playerWin();
-        } 
-    
-    else if ( (hand2 === 'scissors' && hand1 === 'paper') ||
-              (hand2 === 'rock' && hand1 === 'scissors') ||
-              (hand2 === 'paper' && hand1 === 'rock') )
-        {
-        computerWin();
-        }
-
-    else if ( (hand1 === 'scissors' && hand2 === 'scissors') ||
-              (hand1 === 'rock' && hand2 === 'rock') ||
-              (hand1 === 'paper' && hand2 === 'paper') )
-        {
-        tieWin(); 
-        }
-    
+//Creating the function called playRound using TypeScript
+function playRound(playerChoice, computerChoice) {
+    if ((playerChoice === 'scissors' && computerChoice === 'paper') ||
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock')) {
+        score.playerWins++;
+        updatePlayerScore();
+    }
+    else if ((computerChoice === 'scissors' && playerChoice === 'paper') ||
+        (computerChoice === 'rock' && playerChoice === 'scissors') ||
+        (computerChoice === 'paper' && playerChoice === 'rock')) {
+        score.computerWins++;
+        updateComputerScore();
+    }
     else {
-        return null;
+        score.ties++;
+        updateTieScore();
     }
 }
-
-//Calling the function playRound
-playRound();
-
